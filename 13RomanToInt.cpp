@@ -1,26 +1,41 @@
 #include<iostream>
 #include<string>
 #include<vector>
+#include<map>
 using namespace std;
 class Solution {
 public:
-     int romanToInt(string s) {
-        char *chararray;
-       //string::npos是机器上最大的正整数，常用来表示string的结束位置
-        size_t length = s.copy(chararray,string::npos,0);
-        chararray[length]='\0';
-        for(int i=0;i<length;i++)
-        cout<<chararray[i]<<endl;
-        return chararray;
+     int  romanToInt(string s) {
+        //char *chararray;
+        vector<char>chararray;
+        //开始的时候assign函数不会使用
+        chararray.assign(s.begin(),s.end());
+        map<char,int>romanmap;
+        romanmap['I']=1;
+        romanmap['V']=5;
+        romanmap['X']=10;
+        romanmap['L']=50;
+        romanmap['C']=100;
+        romanmap['D']=500;
+        romanmap['M']=1000;
+        int sum=0;
+        int length=chararray.size();
+        for(int i=0;i<length;i++){
+            if(i!=length-1&&romanmap[chararray[i]]<romanmap[chararray[i+1]]){
+                 sum+=romanmap[chararray[i]]*-1;
+            }else{
+            sum+=romanmap[chararray[i]];
+            }
+        }
+        return sum;
     }
 };
 int main(int argc, char const *argv[])
 {
     Solution s;
-    char *chararray;
-    string ss="hello";
-    chararray=s.romanToInt(ss);
-    for(int i=0;chararray[i]!='\0';i++)
-    cout<<chararray[i]<<endl;
+    int chararray;
+    string ss="LVIII";
+    chararray= s.romanToInt(ss);
+    cout<<chararray<<endl;
     return 0;
 }
