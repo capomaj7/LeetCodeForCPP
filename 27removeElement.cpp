@@ -53,7 +53,7 @@ public:
         for(int j=0;j<nums.size();j++){
             if(nums[j]!=val){
                 nums[i]=nums[j];
-                i
+                i++;
             }
         }
         return i;
@@ -62,5 +62,6 @@ public:
 int main(int argc, char const *argv[])
 {
     Solution s;
+    
     return 0;
 }
